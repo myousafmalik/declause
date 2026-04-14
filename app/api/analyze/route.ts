@@ -118,7 +118,7 @@ export async function POST(req: Request) {
         { status: 402 },
       );
     }
-    const next = consumeGuestCall(state.id);
+    const next = await consumeGuestCall(state.id);
     guestRemaining = next.remaining;
   }
 

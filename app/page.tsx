@@ -14,6 +14,12 @@ import {
   Trash2,
   History,
   Eraser,
+  ShieldAlert,
+  Scale,
+  Eye,
+  Zap,
+  Lock,
+  Globe,
 } from "lucide-react";
 import {
   addHistoryItem,
@@ -358,8 +364,29 @@ export default function Page() {
         </section>
       )}
 
-      <footer className="mt-12 text-center text-xs text-neutral-400">
-        Declause is not legal advice. Consult a lawyer for serious matters.
+      <HowItWorks />
+      <FeaturesGrid />
+      <FAQ />
+      <AboutBytelapse />
+
+      <footer className="mt-16 border-t border-neutral-200 pt-8 pb-4">
+        <div className="flex flex-col items-center gap-3 text-center text-xs text-neutral-500 sm:flex-row sm:justify-between sm:text-left">
+          <div>
+            © {new Date().getFullYear()} Declause · Built by{" "}
+            <a
+              href="https://bytelapse.com"
+              target="_blank"
+              rel="noopener"
+              className="font-medium text-neutral-700 hover:text-neutral-900"
+            >
+              Bytelapse
+            </a>
+          </div>
+          <div className="max-w-md text-neutral-400">
+            Declause is not legal advice. For anything high-stakes, consult a qualified
+            attorney.
+          </div>
+        </div>
       </footer>
 
       {historyOpen && (
@@ -432,5 +459,197 @@ export default function Page() {
         initialMode="signup"
       />
     </main>
+  );
+}
+
+function HowItWorks() {
+  const steps = [
+    {
+      icon: FileText,
+      title: "Drop in any document",
+      body: "Paste text, upload a PDF, or give us a URL to a privacy policy or Terms of Service page. Declause extracts the content automatically.",
+    },
+    {
+      icon: Zap,
+      title: "AI reads it line by line",
+      body: "Our language model rewrites the document in plain English, pulls out the clauses that actually matter, and flags anything unusual or user-hostile.",
+    },
+    {
+      icon: ShieldAlert,
+      title: "Spot red flags instantly",
+      body: "Auto-renewals, arbitration waivers, broad data sharing, IP grabs — you see them before you click agree, with a 1–10 fairness score and a bottom-line verdict.",
+    },
+  ];
+  return (
+    <section id="how-it-works" className="mt-20">
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          How Declause works
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-neutral-600">
+          Three steps from legal jargon to a decision you can actually make.
+        </p>
+      </div>
+      <ol className="grid gap-4 sm:grid-cols-3">
+        {steps.map((s, i) => (
+          <li
+            key={s.title}
+            className="relative rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
+          >
+            <div className="mb-4 flex items-center gap-3">
+              <div className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-600 text-white">
+                <s.icon className="size-5" />
+              </div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                Step {i + 1}
+              </span>
+            </div>
+            <h3 className="text-base font-semibold text-neutral-900">{s.title}</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function FeaturesGrid() {
+  const features = [
+    {
+      icon: Eye,
+      title: "Red flags, surfaced",
+      body: "Data sharing, auto-renewal, arbitration, liability waivers, IP claims — all called out explicitly.",
+    },
+    {
+      icon: Scale,
+      title: "Fairness score",
+      body: "A 1–10 rating tells you at a glance whether a document is user-friendly or predatory.",
+    },
+    {
+      icon: Lock,
+      title: "Your docs stay yours",
+      body: "Pasted text is sent once to the language model for analysis. No long-term storage, no training data.",
+    },
+    {
+      icon: Globe,
+      title: "Works everywhere",
+      body: "Terms of Service, privacy policies, NDAs, employment contracts, SaaS agreements, EULAs.",
+    },
+  ];
+  return (
+    <section id="features" className="mt-16">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold tracking-tight">What you get</h2>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {features.map((f) => (
+          <div
+            key={f.title}
+            className="flex gap-4 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm"
+          >
+            <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-neutral-100 text-neutral-800">
+              <f.icon className="size-5" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-neutral-900">{f.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-neutral-600">{f.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  const faqs = [
+    {
+      q: "What does Declause do?",
+      a: "Declause takes any legal document — Terms & Conditions, privacy policies, NDAs, contracts — and instantly produces a plain-English summary, a list of key clauses, a red-flags section highlighting risky terms, and a fairness score from 1 to 10.",
+    },
+    {
+      q: "Is Declause free?",
+      a: "Yes. Guests get 3 free analyses without signing up. Creating a free account removes the limit. We may add paid tiers later for heavy users, but the core tool stays free.",
+    },
+    {
+      q: "Can I upload PDFs or paste a URL?",
+      a: "Both. Paste text directly, drop in a PDF (up to 10 MB), or fetch from a URL — Declause extracts the content and analyzes it for you.",
+    },
+    {
+      q: "Is this legal advice?",
+      a: "No. Declause is an AI-assisted explainer, not a substitute for a lawyer. For anything high-stakes, consult a qualified attorney. Treat our output as a starting point, not a verdict.",
+    },
+    {
+      q: "Who built Declause?",
+      a: "Declause is built and maintained by Bytelapse, a software agency specializing in fullstack development, data engineering, and AI products.",
+    },
+  ];
+  return (
+    <section id="faq" className="mt-16">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold tracking-tight">Common questions</h2>
+      </div>
+      <div className="divide-y divide-neutral-200 rounded-2xl border border-neutral-200 bg-white">
+        {faqs.map((f) => (
+          <details key={f.q} className="group px-5 py-4">
+            <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-medium text-neutral-900 marker:hidden">
+              {f.q}
+              <span className="text-neutral-400 transition group-open:rotate-45">+</span>
+            </summary>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-600">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function AboutBytelapse() {
+  const services = [
+    "Full-stack web development",
+    "Data engineering & analytics",
+    "AI & machine learning",
+    "Product design & prototyping",
+    "DevOps & cloud infrastructure",
+  ];
+  return (
+    <section id="about" className="mt-16">
+      <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-gradient-to-br from-neutral-900 via-indigo-950 to-fuchsia-950 p-8 text-white shadow-sm sm:p-10">
+        <div className="absolute -right-16 -top-16 size-56 rounded-full bg-fuchsia-500/20 blur-3xl" />
+        <div className="absolute -bottom-20 -left-10 size-64 rounded-full bg-indigo-500/20 blur-3xl" />
+        <div className="relative">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-indigo-300">
+            Built by Bytelapse
+          </p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            A software agency that ships.
+          </h2>
+          <p className="mt-3 max-w-2xl text-neutral-200">
+            Bytelapse partners with startups and scale-ups to build production-grade
+            fullstack applications, data platforms, and AI products. Declause is one of
+            our side projects — a taste of what we build when we&apos;re not on a
+            client engagement.
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {services.map((s) => (
+              <li
+                key={s}
+                className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-100 backdrop-blur"
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+          <a
+            href="https://bytelapse.com"
+            target="_blank"
+            rel="noopener"
+            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:bg-neutral-100"
+          >
+            Visit bytelapse.com →
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }

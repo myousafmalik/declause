@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { db, type GuestRow } from "@/lib/db";
+import { getDb, type GuestRow } from "@/lib/db";
 
 const GUEST_COOKIE = "declause_guest";
 const GUEST_LIMIT = 3;
@@ -13,15 +13,26 @@ export type GuestState = {
   exhausted: boolean;
 };
 
-function fetchOrCreateRow(id: string): GuestRow {
-  const existing = db.prepare("SELECT * FROM guests WHERE id = ?").get(id) as
-    | GuestRow
-    | undefined;
-  if (existing) return existing;
+async function fetchOrCreateRow(id: string): Promise<GuestRow> {
+  const db = await getDb();
+  const result = await db.execute({
+    sql: "SELECT id, count, created_at, updated_at FROM guests WHERE id = ?",
+    args: [id],
+  });
+  const row = result.rows[0];
+  if (row) {
+    return {
+      id: row.id as string,
+      count: Number(row.count),
+      created_at: Number(row.created_at),
+      updated_at: Number(row.updated_at),
+    };
+  }
   const now = Date.now();
-  db.prepare(
-    "INSERT INTO guests (id, count, created_at, updated_at) VALUES (?, 0, ?, ?)",
-  ).run(id, now, now);
+  await db.execute({
+    sql: "INSERT INTO guests (id, count, created_at, updated_at) VALUES (?, 0, ?, ?)",
+    args: [id, now, now],
+  });
   return { id, count: 0, created_at: now, updated_at: now };
 }
 
@@ -40,7 +51,7 @@ export async function readGuestState(): Promise<GuestState> {
     });
   }
 
-  const row = fetchOrCreateRow(id);
+  const row = await fetchOrCreateRow(id);
   return {
     id,
     used: row.count,
@@ -50,9 +61,10 @@ export async function readGuestState(): Promise<GuestState> {
   };
 }
 
-export function consumeGuestCall(id: string): GuestState {
+export async function consumeGuestCall(id: string): Promise<GuestState> {
+  const db = await getDb();
   const now = Date.now();
-  const row = fetchOrCreateRow(id);
+  const row = await fetchOrCreateRow(id);
   if (row.count >= GUEST_LIMIT) {
     return {
       id,
@@ -63,11 +75,10 @@ export function consumeGuestCall(id: string): GuestState {
     };
   }
   const newCount = row.count + 1;
-  db.prepare("UPDATE guests SET count = ?, updated_at = ? WHERE id = ?").run(
-    newCount,
-    now,
-    id,
-  );
+  await db.execute({
+    sql: "UPDATE guests SET count = ?, updated_at = ? WHERE id = ?",
+    args: [newCount, now, id],
+  });
   return {
     id,
     used: newCount,

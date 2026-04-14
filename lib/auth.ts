@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { db, type UserRow } from "@/lib/db";
+import { getDb, type UserRow } from "@/lib/db";
 
 const SESSION_COOKIE = "declause_session";
 const SESSION_DAYS = 30;
@@ -74,23 +74,55 @@ export async function clearSessionCookie(): Promise<void> {
   store.delete(SESSION_COOKIE);
 }
 
-export function findUserByEmail(email: string): UserRow | undefined {
-  return db
-    .prepare("SELECT * FROM users WHERE email = ?")
-    .get(email.toLowerCase()) as UserRow | undefined;
+export async function findUserByEmail(email: string): Promise<UserRow | undefined> {
+  const db = await getDb();
+  const result = await db.execute({
+    sql: "SELECT id, email, password_hash, created_at FROM users WHERE email = ?",
+    args: [email.toLowerCase()],
+  });
+  const row = result.rows[0];
+  if (!row) return undefined;
+  return {
+    id: row.id as string,
+    email: row.email as string,
+    password_hash: row.password_hash as string,
+    created_at: Number(row.created_at),
+  };
 }
 
-export function findUserById(id: string): UserRow | undefined {
-  return db.prepare("SELECT * FROM users WHERE id = ?").get(id) as UserRow | undefined;
+export async function findUserById(id: string): Promise<UserRow | undefined> {
+  const db = await getDb();
+  const result = await db.execute({
+    sql: "SELECT id, email, password_hash, created_at FROM users WHERE id = ?",
+    args: [id],
+  });
+  const row = result.rows[0];
+  if (!row) return undefined;
+  return {
+    id: row.id as string,
+    email: row.email as string,
+    password_hash: row.password_hash as string,
+    created_at: Number(row.created_at),
+  };
 }
 
-export function createUser(email: string, passwordHash: string): UserRow {
+export async function createUser(
+  email: string,
+  passwordHash: string,
+): Promise<UserRow> {
+  const db = await getDb();
   const id = crypto.randomUUID();
   const now = Date.now();
-  db.prepare(
-    "INSERT INTO users (id, email, password_hash, created_at) VALUES (?, ?, ?, ?)",
-  ).run(id, email.toLowerCase(), passwordHash, now);
-  return { id, email: email.toLowerCase(), password_hash: passwordHash, created_at: now };
+  await db.execute({
+    sql: "INSERT INTO users (id, email, password_hash, created_at) VALUES (?, ?, ?, ?)",
+    args: [id, email.toLowerCase(), passwordHash, now],
+  });
+  return {
+    id,
+    email: email.toLowerCase(),
+    password_hash: passwordHash,
+    created_at: now,
+  };
 }
 
 declare global {

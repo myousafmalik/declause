@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     );
   }
 
-  if (findUserByEmail(email)) {
+  if (await findUserByEmail(email)) {
     return Response.json(
       { error: "An account with this email already exists" },
       { status: 409 },
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
   }
 
   const hash = await hashPassword(password);
-  const user = createUser(email, hash);
+  const user = await createUser(email, hash);
   await setSessionCookie({ id: user.id, email: user.email });
 
   return Response.json({ user: { id: user.id, email: user.email } });

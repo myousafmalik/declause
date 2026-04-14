@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "Email and password required" }, { status: 400 });
   }
 
-  const user = findUserByEmail(email);
+  const user = await findUserByEmail(email);
   if (!user) {
     return Response.json({ error: "Invalid email or password" }, { status: 401 });
   }
