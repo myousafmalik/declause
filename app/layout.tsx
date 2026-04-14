@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { AuthProvider } from "./components/auth-context";
 import { ToastProvider } from "./components/toast";
@@ -169,6 +170,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </AuthProvider>
         </ToastProvider>
+        <Analytics />
       </body>
     </html>
   );
