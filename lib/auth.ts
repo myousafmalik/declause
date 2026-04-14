@@ -15,7 +15,6 @@ function getSecret(): Uint8Array {
       console.warn(
         "[auth] SESSION_SECRET not set in .env — using insecure dev default. Set one before deploying.",
       );
-      // @ts-expect-error one-off flag
       globalThis.__declauseSecretWarned = true;
     }
   }
