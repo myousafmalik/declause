@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    default: `${SITE_NAME} - ${SITE_TAGLINE}`,
     template: `%s · ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    title: `${SITE_NAME} - ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    title: `${SITE_NAME} - ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
     site: TWITTER_HANDLE,
     creator: TWITTER_HANDLE,
@@ -108,7 +108,7 @@ const faqLd = {
       name: "What does Declause do?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Declause takes any legal document — Terms & Conditions, privacy policies, NDAs, contracts — and instantly produces a plain-English summary, a list of key clauses, a red-flags section highlighting risky terms, and a fairness score from 1 to 10.",
+        text: "Declause takes any legal document - Terms & Conditions, privacy policies, NDAs, contracts - and instantly produces a plain-English summary, a list of key clauses, a red-flags section highlighting risky terms, and a fairness score from 1 to 10.",
       },
     },
     {
@@ -124,7 +124,7 @@ const faqLd = {
       name: "Can I upload PDFs or paste a URL?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Both. Paste text directly, upload a PDF, or drop in a URL to a privacy policy or ToS page — Declause extracts the content and analyzes it.",
+        text: "Both. Paste text directly, upload a PDF, or drop in a URL to a privacy policy or ToS page - Declause extracts the content and analyzes it.",
       },
     },
     {
@@ -132,7 +132,7 @@ const faqLd = {
       name: "Is this legal advice?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. Declause is an AI-assisted explainer, not a substitute for a lawyer. For anything high-stakes — a contract you're signing, a lawsuit, a business agreement — consult a qualified attorney.",
+        text: "No. Declause is an AI-assisted explainer, not a substitute for a lawyer. For anything high-stakes - a contract you're signing, a lawsuit, a business agreement - consult a qualified attorney.",
       },
     },
     {

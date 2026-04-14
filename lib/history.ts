@@ -30,7 +30,7 @@ export function saveHistory(items: HistoryItem[]): void {
   try {
     localStorage.setItem(KEY, JSON.stringify(items.slice(0, MAX_ITEMS)));
   } catch {
-    // quota exceeded — drop oldest and retry once
+    // quota exceeded - drop oldest and retry once
     try {
       localStorage.setItem(KEY, JSON.stringify(items.slice(0, 10)));
     } catch {

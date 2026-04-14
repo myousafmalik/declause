@@ -13,7 +13,7 @@ function getSecret(): Uint8Array {
   if (!process.env.SESSION_SECRET) {
     if (!globalThis.__declauseSecretWarned) {
       console.warn(
-        "[auth] SESSION_SECRET not set in .env — using insecure dev default. Set one before deploying.",
+        "[auth] SESSION_SECRET not set in .env - using insecure dev default. Set one before deploying.",
       );
       globalThis.__declauseSecretWarned = true;
     }

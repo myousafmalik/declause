@@ -75,7 +75,7 @@ export default function Page() {
       if (res.status === 402) {
         setAuthPrompt(true);
         await refresh();
-        push("error", "Free trial used up — sign up to keep going.");
+        push("error", "Free trial used up - sign up to keep going.");
         return;
       }
 
@@ -477,7 +477,7 @@ function HowItWorks() {
     {
       icon: ShieldAlert,
       title: "Spot red flags instantly",
-      body: "Auto-renewals, arbitration waivers, broad data sharing, IP grabs — you see them before you click agree, with a 1–10 fairness score and a bottom-line verdict.",
+      body: "Auto-renewals, arbitration waivers, broad data sharing, IP grabs - you see them before you click agree, with a 1–10 fairness score and a bottom-line verdict.",
     },
   ];
   return (
@@ -518,7 +518,7 @@ function FeaturesGrid() {
     {
       icon: Eye,
       title: "Red flags, surfaced",
-      body: "Data sharing, auto-renewal, arbitration, liability waivers, IP claims — all called out explicitly.",
+      body: "Data sharing, auto-renewal, arbitration, liability waivers, IP claims - all called out explicitly.",
     },
     {
       icon: Scale,
@@ -565,7 +565,7 @@ function FAQ() {
   const faqs = [
     {
       q: "What does Declause do?",
-      a: "Declause takes any legal document — Terms & Conditions, privacy policies, NDAs, contracts — and instantly produces a plain-English summary, a list of key clauses, a red-flags section highlighting risky terms, and a fairness score from 1 to 10.",
+      a: "Declause takes any legal document - Terms & Conditions, privacy policies, NDAs, contracts - and instantly produces a plain-English summary, a list of key clauses, a red-flags section highlighting risky terms, and a fairness score from 1 to 10.",
     },
     {
       q: "Is Declause free?",
@@ -573,7 +573,7 @@ function FAQ() {
     },
     {
       q: "Can I upload PDFs or paste a URL?",
-      a: "Both. Paste text directly, drop in a PDF (up to 10 MB), or fetch from a URL — Declause extracts the content and analyzes it for you.",
+      a: "Both. Paste text directly, drop in a PDF (up to 10 MB), or fetch from a URL - Declause extracts the content and analyzes it for you.",
     },
     {
       q: "Is this legal advice?",
@@ -627,7 +627,7 @@ function AboutBytelapse() {
           <p className="mt-3 max-w-2xl text-neutral-200">
             Bytelapse partners with startups and scale-ups to build production-grade
             fullstack applications, data platforms, and AI products. Declause is one of
-            our side projects — a taste of what we build when we&apos;re not on a
+            our side projects - a taste of what we build when we&apos;re not on a
             client engagement.
           </p>
           <ul className="mt-6 flex flex-wrap gap-2">

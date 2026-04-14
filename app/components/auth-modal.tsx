@@ -45,7 +45,7 @@ export function AuthModal({
     try {
       if (mode === "signup") {
         await signup(email, password);
-        push("success", "Account created — you're signed in.");
+        push("success", "Account created - you're signed in.");
       } else {
         await login(email, password);
         push("success", "Welcome back.");

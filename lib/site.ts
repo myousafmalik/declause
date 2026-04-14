@@ -8,7 +8,7 @@ export const SITE_NAME = "Declause";
 export const SITE_TAGLINE = "Legal documents in plain English";
 
 export const SITE_DESCRIPTION =
-  "Instantly translate Terms & Conditions, privacy policies, and NDAs into plain English. Spot red flags, hidden clauses, auto-renewals, arbitration waivers, and data sharing — before you click agree.";
+  "Instantly translate Terms & Conditions, privacy policies, and NDAs into plain English. Spot red flags, hidden clauses, auto-renewals, arbitration waivers, and data sharing - before you click agree.";
 
 export const SITE_KEYWORDS = [
   "plain english legal",

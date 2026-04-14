@@ -11,7 +11,7 @@ function create(): Client {
   const url = process.env.DB_URL;
   const authToken = process.env.DB_TOKEN;
   if (!url) {
-    throw new Error("DB_URL not set — add your Turso database URL to .env");
+    throw new Error("DB_URL not set - add your Turso database URL to .env");
   }
   return createClient({ url, authToken });
 }
